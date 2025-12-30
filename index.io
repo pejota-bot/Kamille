@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Jogo do amor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .fade {
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+        background: white;
+        padding: 50px;
+        max-width: 700px;
+        width: 100%;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+
+    .red {
+        background: #c94b4b;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .question {
+        background: #f5f5f5;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    button {
+        padding: 14px 32px;
+        border-radius: 30px;
+        border: none;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+        cursor: pointer;
+        margin: 10px;
+        font-size: 16px;
+    }
+
+    .yes { background: #4caf50; color: white; }
+    .no  { background: #e53935; color: white; }
+
+    .black {
+        background: black;
+        color: white;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        font-weight: 700;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .black button {
+        background: white;
+        color: black;
+    }
+
+    /* CONTORNO DE CORAÇÃO */
+    .heart {
+        width: 260px;
+        height: 260px;
+        background: red;
+        position: relative;
+        transform: rotate(-45deg);
+        margin: 0 auto;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        width: 260px;
+        height: 260px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .heart::before {
+        top: -130px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 130px;
+        top: 0;
+    }
+
+    .heart img {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        transform: rotate(45deg);
+        border-radius: 12px;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+    function inicio() {
+        document.body.style.background = "#f0f2f5";
+        document.getElementById("app").innerHTML = `
+            <div class="card fade">
+                <div class="red">
+                    Esse jogo é destinado a Kamille Brito, namorada de Paulo.
+                </div>
+
+                <div class="question">
+                    Seu nome é Kamille Brito?
+                </div>
+
+                <button class="yes" onclick="namorado()">Sim</button>
+                <button class="no" onclick="telaPreta('Saia imediatamente.')">Não</button>
+            </div>
+        `;
+    }
+
+    function namorado() {
+        document.getElementById("app").innerHTML = `
+            <div class="card fade">
+                <div class="question">
+                    Qual o nome do seu namorado?
+                </div>
+
+                <button class="yes" onclick="bonito()">Paulo</button>
+                <button class="no" onclick="telaPreta('como assim')">Não sei</button>
+            </div>
+        `;
+    }
+
+    function bonito() {
+        document.getElementById("app").innerHTML = `
+            <div class="card fade">
+                <div class="question">
+                    Quem é o mais bonito do planeta?
+                </div>
+
+                <button class="yes" onclick="final()">Paulo</button>
+            </div>
+        `;
+    }
+
+    function final() {
+        document.getElementById("app").innerHTML = `
+            <div class="card fade">
+                <div class="heart">
+                    <img src="https://i.imgur.com/8Km9tLL.jpg">
+                </div>
+            </div>
+        `;
+    }
+
+    function telaPreta(texto) {
+        document.body.style.background = "black";
+        document.getElementById("app").innerHTML = `
+            <div class="black fade">
+                <div>${texto}</div>
+                <button onclick="inicio()">Voltar ao início</button>
+            </div>
+        `;
+    }
+
+    inicio();
+</script>
+
+</body>
+</html>
